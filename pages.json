@@ -46,13 +46,19 @@
 		},{
 			"path": "pages/classify/index",
 			"style": {
-				"navigationBarTitleText": "分类"
+				"navigationBarTitleText": "分类",
+				"navigationStyle": "custom"
 			}
 		},{
 			"path": "pages/my/index",
 			"style": {
 				"navigationBarTitleText": "我的",
 				"navigationStyle": "custom"
+			}
+		},{
+			"path": "pages/my/weal",
+			"style": {
+				"navigationBarTitleText": "福利"
 			}
 		}
 	],

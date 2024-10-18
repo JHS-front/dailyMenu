@@ -1,6 +1,5 @@
 <template>
 	<view class="indexContainer">
-		<image src="../../static/index/header.png"></image>
 		<view class="header">
 			<view class="title">美食记忆库</view>
 			<view class="swiperView">
@@ -18,7 +17,20 @@
 				</view>
 			</view>
 			<view class="curve">
-				
+				<div class="title">
+					<div class="left">价格走势</div>
+					<div class="right">{{ formattedDate }} 更新</div>
+				</div>
+				<qiun-data-charts
+					type="line"
+					:opts="lineopts"
+					inScrollView="true"
+					:errorShow="false"
+					:errorReload="false"
+					:canvas2d="true"
+					:ontouch="true"
+					:chartData="linechartData"
+				/>
 			</view>
 		</view>
   	</view>
@@ -62,14 +74,72 @@
 						name:"豆制品类",
 						imgUrl:"../../static/index/bean.png",
 					}
-				]
+				],
+				formattedDate:"",
+				lineopts: {
+					color: ['#1890FF', '#91CB74', '#FAC858', '#EE6666', '#73C0DE', '#3CA272', '#FC8452', '#9A60B4', '#ea7ccc'],
+					padding: [15,10,0,10],
+					enableScroll: true,
+					legend: {},
+					xAxis: {
+						disableGrid: true,
+						scrollShow: true,
+						itemCount: 4
+					},
+					yAxis: {
+						gridType: "dash",
+						dashLength: 2
+					},
+					extra: {
+						line: {
+							type: "straight",
+							width: 2,
+							activeType: "hollow"
+						}
+					}
+				},
+				linechartData:{}
 			}
 		},
 		onLoad() {
-
+			this.formattedDate = this.formatDate(new Date());
+			this.getServerData()
 		},
 		methods: {
-
+			formatDate(date) {
+				const year = date.getFullYear();
+				const month = ('0' + (date.getMonth() + 1)).slice(-2);
+				const day = ('0' + date.getDate()).slice(-2);
+				return `${year}-${month}-${day}`;
+			},
+			getServerData() {
+				//模拟从服务器获取数据时的延时
+				setTimeout(() => {
+					//模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
+					let res = {
+						"categories": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"],
+						"series": [
+							{
+								"name": "蔬菜类",
+								"data": [100, 95, 90, 105, 90, 120, 115, 110, 100, 130, 125, 110]
+							},
+							{
+								"name": "鱼类",
+								"data": [130, 105, 95, 115, 100, 130, 120, 115, 125, 140, 135, 120]
+							},
+							{
+								"name": "肉类",
+								"data": [110, 115, 110, 95, 120, 130, 125, 135, 145, 150, 140, 130]
+							},
+							{
+								"name": "海鲜类",
+								"data": [150, 140, 120, 130, 140, 130, 125, 140, 135, 150, 160, 145]
+							},
+						]
+					};
+					this.linechartData = JSON.parse(JSON.stringify(res));
+				}, 500);
+			}
 		}
 	}
 </script>
@@ -81,12 +151,12 @@
     background: #F5F5F4;
     height: 100vh;
 	width: 100%;
+	background-image: url('../../static/index/header.png');
+    background-repeat: no-repeat;
+    background-size: contain;
 	.header{
-		position: relative;
-		top: -420rpx;
 		display: flex;
 		flex-direction: column;
-		// background: linear-gradient( 360deg, #6FB1FC 0%, #4364F7 50%, #0052D4 100%);
 		padding-bottom: 20rpx;
 		padding: 0 30rpx;
 		.title{
@@ -100,8 +170,6 @@
 		}
 	}
 	.main{
-		position: relative;
-		top: -420rpx;
 		display: flex;
 		flex-direction: column;
 		padding: 0 30rpx;
@@ -132,6 +200,26 @@
 			}
 			.classifyCon:not(:nth-child(4n)) {
 				margin-right: calc(4% / 3);
+			}
+		}
+		.curve{
+			background: #FFFFFF;
+			border-radius: 16rpx 16rpx 16rpx 16rpx;
+			padding: 24rpx 20rpx;
+			.title{
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				.left{
+					font-weight: 600;
+					font-size: 28rpx;
+					color: #313131;
+				}
+				.right{
+					font-weight: 400;
+					font-size: 24rpx;
+					color: #979797;
+				}
 			}
 		}
 	}

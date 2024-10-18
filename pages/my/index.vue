@@ -21,6 +21,11 @@
         </view>
     </view>
     <view class="footer">退出登录</view>
+    <u-modal :show="show"  title="身份验证" showCancelButton="true" @confirm="confirmModal" @cancel="show = false">
+        <view class="slot-content">
+            <u--input placeholder="请输入真实姓名" border="surround" clearable v-model="name"></u--input>
+        </view>
+    </u-modal>
   </view>
 </template>
 
@@ -30,6 +35,8 @@ export default {
   name: 'My',
   data() {
     return {
+        show:false,
+        name:"",
         avatarUrl:"https://profile-avatar.csdnimg.cn/dbc558b9be5e4154b3e1e9cb0792097c_m0_54340021.jpg!1",
         cellTopList: [
             {
@@ -47,6 +54,11 @@ export default {
                 name: '关于',
                 pageUrl: '/pages/login/login-out'
             },
+            {
+                imgUrl: '../../static/tabBar/relate.png',
+                name: '福利',
+                pageUrl: '/pages/login/login-out'
+            },
         ],
     }
   },
@@ -55,9 +67,31 @@ export default {
         console.log(e,'点击上传头像');
     },
     toPage(item) {
-        uni.navigateTo({
-            url: item.pageUrl
-        });
+        if(item.name == '福利'){
+            this.name = ""
+            this.show = true
+        }
+        // uni.navigateTo({
+        //     url: item.pageUrl
+        // });
+    },
+    confirmModal(e){
+        if(this.name == '何诗雅'){
+            uni.showToast({
+                title: '验证成功',
+                icon: 'success'
+            });
+            this.show = false
+            uni.navigateTo({
+                url: '/pages/my/weal'
+            });
+        }else{
+            uni.showToast({
+                title: '验证失败',
+                icon: 'error'
+            });
+            this.show = false
+        }
     }
   },
   onShow() {
