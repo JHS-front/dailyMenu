@@ -29,6 +29,12 @@
 				"selectedIconPath": "static/tabBar/message-hl.png"
 			},
 			{
+				"pagePath": "pages/map/index",
+				"text": "地图",
+				"iconPath": "static/tabBar/message.png",
+				"selectedIconPath": "static/tabBar/message-hl.png"
+			},
+			{
 				"pagePath": "pages/my/index",
 				"text": "我的",
 				"iconPath": "static/tabBar/my.png",
@@ -59,6 +65,11 @@
 			"path": "pages/my/weal",
 			"style": {
 				"navigationBarTitleText": "福利"
+			}
+		},{
+			"path": "pages/map/index",
+			"style": {
+				"navigationBarTitleText": "地图"
 			}
 		}
 	],
