@@ -71,6 +71,12 @@
 			"style": {
 				"navigationBarTitleText": "地图"
 			}
+		},{
+			"path": "pages/my/formTemplate",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {

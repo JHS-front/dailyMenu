@@ -39,25 +39,30 @@ export default {
         name:"",
         avatarUrl:"https://profile-avatar.csdnimg.cn/dbc558b9be5e4154b3e1e9cb0792097c_m0_54340021.jpg!1",
         cellTopList: [
-            {
-                imgUrl: '../../static/tabBar/setting.png',
-                name: '设置与隐私',
-                pageUrl: '/pages/login/login-out'
-            },
-            {
-                imgUrl: '../../static/tabBar/contact.png',
-                name: '联系我们',
-                pageUrl: '/pages/login/login-out'
-            },
-            {
-                imgUrl: '../../static/tabBar/relate.png',
-                name: '关于',
-                pageUrl: '/pages/login/login-out'
-            },
+            // {
+            //     imgUrl: '../../static/tabBar/setting.png',
+            //     name: '设置与隐私',
+            //     pageUrl: '/pages/login/login-out'
+            // },
+            // {
+            //     imgUrl: '../../static/tabBar/contact.png',
+            //     name: '联系我们',
+            //     pageUrl: '/pages/login/login-out'
+            // },
+            // {
+            //     imgUrl: '../../static/tabBar/relate.png',
+            //     name: '关于',
+            //     pageUrl: '/pages/login/login-out'
+            // },
             {
                 imgUrl: '../../static/tabBar/relate.png',
                 name: '福利',
                 pageUrl: '/pages/login/login-out'
+            },
+            {
+                imgUrl: '../../static/tabBar/relate.png',
+                name: '表单模板',
+                pageUrl: '/pages/my/formTemplate'
             },
         ],
     }
@@ -70,10 +75,21 @@ export default {
         if(item.name == '福利'){
             this.name = ""
             this.show = true
+        }else{
+            if(item.name == '表单模板'){
+                let type = 'add'
+                let id = ''
+                uni.navigateTo({
+                    url:'/pages/my/formTemplate?type=' + type + '&id=' + id
+                });
+            }else{
+                uni.navigateTo({
+                    url: item.pageUrl
+                });
+            }
+
         }
-        // uni.navigateTo({
-        //     url: item.pageUrl
-        // });
+
     },
     confirmModal(e){
         if(this.name == '何诗雅'){

@@ -20,8 +20,8 @@
     <u-icon
       v-if="!disabled"
       class="select-input__arrow-right-icon"
-      name="https://file.zhcim.com/arrow-right-icon.png"
-      size="32"
+      name="arrow-right"
+      size="20"
     />
   </view>
 </template>
